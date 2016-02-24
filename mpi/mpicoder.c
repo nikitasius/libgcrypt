@@ -27,7 +27,7 @@
 #include "mpi-internal.h"
 #include "g10lib.h"
 
-#define MAX_EXTERN_MPI_BITS 16384
+#define MAX_EXTERN_MPI_BITS 32768
 
 /* Helper used to scan PGP style MPIs.  Returns NULL on failure. */
 static gcry_mpi_t
