@@ -1,3 +1,8 @@
+2016-02-24  nikitasius <nikita@saraeff.net>
+	Release 1.6.5.RSA32k
+	
+	Added: support for 32769 RSA keypairs (https://github.com/nikitasius/libgcrypt).
+
 2016-02-09  Werner Koch  <wk@gnupg.org>
 
 	Release 1.6.5.
