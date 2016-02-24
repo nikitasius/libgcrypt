@@ -1,5 +1,8 @@
-# libgcrypt - *for the moment testing, do not use!*
-libgcrypt library for [GnuPG](https://github.com/nikitasius/GnuPG/) with 32kb RSA keys.
+# libgcrypt
+###libgcrypt library for [GnuPG](https://github.com/nikitasius/GnuPG/) with 32kb RSA keys.
+## WARNING
+## USE MODIFIED LIBGCRYPT AT YOUR OWN RISK. SOFTWARE MAY CAUSE DATA LOSS, SYSTEM CRASHES, AND RED EYES.
+### Large keys, created in modified GnuPG with modified libgcrypt CANNOT be read by vanilla versions! It mean, that if you have another PGP stuff in your PC which work work with keys, you should to export keys OR create another keyring for vanilla versions.
 
 ## Description
 This library based on original [libgcrypt](https://gnupg.org/ftp/gcrypt/libgcrypt/). To start i copy original library into the branch `libgcrypt-x-y-z`, where it stays **non**-modified. After it goes into `devel` branch where im working with. And after it goes into `libgcrypt-x-y-z-RSA32k` branch, where can be downloaded.
