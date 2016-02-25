@@ -1,6 +1,6 @@
 diff -uraN a/ChangeLog b/ChangeLog
 --- a/ChangeLog	2016-02-09 11:25:09.000000000 +0100
-+++ b/ChangeLog	2016-02-25 17:08:24.000000000 +0100
++++ b/ChangeLog	2016-02-25 17:18:38.000000000 +0100
 @@ -1,3 +1,11 @@
 +2016-02-24  Nikita S. <nikita@saraeff.net>
 +
@@ -13,9 +13,85 @@ diff -uraN a/ChangeLog b/ChangeLog
  2016-02-09  Werner Koch  <wk@gnupg.org>
  
  	Release 1.6.5.
+diff -uraN a/libgcrypt-1.6.5-RSA32k.patch b/libgcrypt-1.6.5-RSA32k.patch
+--- a/libgcrypt-1.6.5-RSA32k.patch	1970-01-01 01:00:00.000000000 +0100
++++ b/libgcrypt-1.6.5-RSA32k.patch	2016-02-25 17:18:38.000000000 +0100
+@@ -0,0 +1,72 @@
++diff -uraN a/ChangeLog b/ChangeLog
++--- a/ChangeLog	2016-02-09 11:25:09.000000000 +0100
+++++ b/ChangeLog	2016-02-25 17:08:24.000000000 +0100
++@@ -1,3 +1,11 @@
+++2016-02-24  Nikita S. <nikita@saraeff.net>
+++
+++	Release 1.6.5.RSA32k (https://github.com/nikitasius/libgcrypt/tree/1.6.5-RSA32k)
+++	
+++	Add: RSA-32768 keypair support.
+++	* mpi/mpicoder.c (#define): MAX_EXTERN_MPI_BITS now 32768.
+++	* src/secmem.c (#define): MINIMUM_POOL_SIZE and MAX_EXTERN_MPI_BITS are doubled, i.e. 32768 and 65536.
+++
++ 2016-02-09  Werner Koch  <wk@gnupg.org>
++ 
++ 	Release 1.6.5.
++diff -uraN a/mpi/mpicoder.c b/mpi/mpicoder.c
++--- a/mpi/mpicoder.c	2015-02-23 11:55:58.000000000 +0100
+++++ b/mpi/mpicoder.c	2016-02-25 17:08:24.000000000 +0100
++@@ -27,7 +27,7 @@
++ #include "mpi-internal.h"
++ #include "g10lib.h"
++ 
++-#define MAX_EXTERN_MPI_BITS 16384
+++#define MAX_EXTERN_MPI_BITS 32768
++ 
++ /* Helper used to scan PGP style MPIs.  Returns NULL on failure. */
++ static gcry_mpi_t
++diff -uraN a/README.md b/README.md
++--- a/README.md	1970-01-01 01:00:00.000000000 +0100
+++++ b/README.md	2016-02-25 17:08:24.000000000 +0100
++@@ -0,0 +1,27 @@
+++# libgcrypt
+++###libgcrypt library for [GnuPG](https://github.com/nikitasius/GnuPG/) with 32kb RSA keys.
+++## WARNING
+++## USE MODIFIED LIBGCRYPT AT YOUR OWN RISK. SOFTWARE MAY CAUSE DATA LOSS, SYSTEM CRASHES, AND RED EYES.
+++### Large keys, created in modified GnuPG with modified libgcrypt CANNOT be read by vanilla versions! It mean, that if you have another PGP stuff in your PC which work with keys, you should to export keys OR create another keyring for vanilla versions.
+++
+++## Description
+++This library based on original [libgcrypt 1.6.5](https://gnupg.org/ftp/gcrypt/libgcrypt/libgcrypt-1.6.5.tar.bz2). Original version of libgcrypt 1.6.5 was copied into the branch [libgcrypt-1.6.5](https://github.com/nikitasius/libgcrypt/tree/libgcrypt-1.6.5) and after was copied into branch **devel**, where was modified. And complete version was moved into branch [1.6.5-RSA32k](https://github.com/nikitasius/libgcrypt/tree/1.6.5-RSA32k).
+++
+++## Configuration
+++Run `./configure` or `./configure --help` in case if you want custom configuration.
+++
+++## Compilation
+++Run `make`, if no errors, run `make check`.
+++
+++## Installation
+++If all tests passed, run `checkinstall`
+++
+++>1 -  Summary: [ libgcrypt-1.6.5 ]
+++
+++>2 -  Name:    [ libgcrypt ]
+++
+++>3 -  Version: [ 1.6.5 ]
+++
+++>11 - Provides: [ libgcrypt ]
+++
+++or run `make install` in case if you do not use `checkinstall`.
++diff -uraN a/src/secmem.c b/src/secmem.c
++--- a/src/secmem.c	2016-02-09 10:10:38.000000000 +0100
+++++ b/src/secmem.c	2016-02-25 17:08:24.000000000 +0100
++@@ -45,8 +45,8 @@
++ #define MAP_ANONYMOUS MAP_ANON
++ #endif
++ 
++-#define MINIMUM_POOL_SIZE 16384
++-#define STANDARD_POOL_SIZE 32768
+++#define MINIMUM_POOL_SIZE 32768
+++#define STANDARD_POOL_SIZE 65536
++ #define DEFAULT_PAGE_SIZE 4096
++ 
++ typedef struct memblock
 diff -uraN a/mpi/mpicoder.c b/mpi/mpicoder.c
 --- a/mpi/mpicoder.c	2015-02-23 11:55:58.000000000 +0100
-+++ b/mpi/mpicoder.c	2016-02-25 17:08:24.000000000 +0100
++++ b/mpi/mpicoder.c	2016-02-25 17:18:38.000000000 +0100
 @@ -27,7 +27,7 @@
  #include "mpi-internal.h"
  #include "g10lib.h"
@@ -27,8 +103,8 @@ diff -uraN a/mpi/mpicoder.c b/mpi/mpicoder.c
  static gcry_mpi_t
 diff -uraN a/README.md b/README.md
 --- a/README.md	1970-01-01 01:00:00.000000000 +0100
-+++ b/README.md	2016-02-25 17:08:24.000000000 +0100
-@@ -0,0 +1,27 @@
++++ b/README.md	2016-02-25 17:18:38.000000000 +0100
+@@ -0,0 +1,33 @@
 +# libgcrypt
 +###libgcrypt library for [GnuPG](https://github.com/nikitasius/GnuPG/) with 32kb RSA keys.
 +## WARNING
@@ -39,6 +115,12 @@ diff -uraN a/README.md b/README.md
 +This library based on original [libgcrypt 1.6.5](https://gnupg.org/ftp/gcrypt/libgcrypt/libgcrypt-1.6.5.tar.bz2). Original version of libgcrypt 1.6.5 was copied into the branch [libgcrypt-1.6.5](https://github.com/nikitasius/libgcrypt/tree/libgcrypt-1.6.5) and after was copied into branch **devel**, where was modified. And complete version was moved into branch [1.6.5-RSA32k](https://github.com/nikitasius/libgcrypt/tree/1.6.5-RSA32k).
 +
 +## Configuration
++### Patching vanilla gnupg-2.0.29
++If by some private reasons you don't want to download this version from this Github repo, you can download patch [libgcrypt-1.6.5-RSA32k.patch](https://raw.githubusercontent.com/nikitasius/libgcrypt/1.6.5-RSA32k/libgcrypt-1.6.5-RSA32k.patch) and download [vanilla libgcrypt-1.6.5](https://gnupg.org/ftp/gcrypt/libgcrypt/libgcrypt-1.6.5.tar.bz2).
++
++After you can check patch content and if all is ok, copy it inside folder with vanilla libgcrypt-1.6.5 and run `patch -p1 < libgcrypt-1.6.5-RSA32k.patch`. After patching your libgcrypt-1.6.5 will be able to work with RSA-32768 keys.
++
++### Debian
 +Run `./configure` or `./configure --help` in case if you want custom configuration.
 +
 +## Compilation
@@ -58,7 +140,7 @@ diff -uraN a/README.md b/README.md
 +or run `make install` in case if you do not use `checkinstall`.
 diff -uraN a/src/secmem.c b/src/secmem.c
 --- a/src/secmem.c	2016-02-09 10:10:38.000000000 +0100
-+++ b/src/secmem.c	2016-02-25 17:08:24.000000000 +0100
++++ b/src/secmem.c	2016-02-25 17:18:38.000000000 +0100
 @@ -45,8 +45,8 @@
  #define MAP_ANONYMOUS MAP_ANON
  #endif
