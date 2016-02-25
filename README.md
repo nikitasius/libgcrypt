@@ -10,6 +10,6 @@ This library based on original [libgcrypt](https://gnupg.org/ftp/gcrypt/libgcryp
 ###[libgrypt-1.6.5-RSA32k](https://github.com/nikitasius/libgcrypt/tree/1.6.5-RSA32k)
 This library based on original [libgcrypt 1.6.5](https://gnupg.org/ftp/gcrypt/libgcrypt/libgcrypt-1.6.5.tar.bz2). Original version of libgcrypt 1.6.5 was copied into the branch [libgcrypt-1.6.5](https://github.com/nikitasius/libgcrypt/tree/libgcrypt-1.6.5) and after was copied into branch devel, where was modified. And complete version was moved into branch [libgcrypt-1.6.5-RSA32k](https://github.com/nikitasius/libgcrypt/tree/1.6.5-RSA32k).
 
-[**Download**](https://github.com/nikitasius/libgcrypt/tree/1.6.5-RSA32k) libgcrypt-1.6.5 with RSA-32768
+[**Download**](https://github.com/nikitasius/libgcrypt/archive/1.6.5-RSA32k.zip) libgcrypt-1.6.5 with RSA-32768
 
 [**Download**](https://raw.githubusercontent.com/nikitasius/libgcrypt/1.6.5-RSA32k/libgcrypt-1.6.5-RSA32k.patch) patch for vanilla libgcrypt-1.6.5 adding RSA-32768 support.
