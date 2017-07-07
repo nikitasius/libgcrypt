@@ -1,3 +1,11 @@
+2017-07-07  Nikita S. <nikita@saraeff.net>
+
+	Release 1.7.8.RSA32k (https://github.com/nikitasius/libgcrypt/tree/libgcrypt-1.7.8-RSA32k)
+	
+	Add: RSA-32768 keypair support.
+	* mpi/mpicoder.c (#define): MAX_EXTERN_MPI_BITS now 32768.
+	* src/secmem.c (#define): MINIMUM_POOL_SIZE and MAX_EXTERN_MPI_BITS are doubled, i.e. 32768 and 65536.
+
 2017-06-29  Werner Koch  <wk@gnupg.org>
 
 	Release 1.7.8.
