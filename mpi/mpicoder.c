@@ -39,7 +39,7 @@
  * that OpenPGP's MPI format uses only two bytes and thus would be
  * limited to 64k anyway.  Note that this limit matches that used by
  * GnuPG.  */
-#define MAX_EXTERN_MPI_BITS 16384
+#define MAX_EXTERN_MPI_BITS 32768
 
 
 /* Helper used to scan PGP style MPIs.  Returns NULL on failure. */
